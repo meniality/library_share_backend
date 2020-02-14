@@ -1,12 +1,12 @@
 class AuthenticationController < ApplicationController
 
   def login
-    user = User.find_by(username: params[:username])
-
+    user = User.find_by(username: params[:user][:username])
+  
     if(!user)
       render json: {error: "Invalid Username"}, status: :unauthorized
     else
-      if user.authenticate(params[:password])
+      if user.authenticate(params[:user][:password])
         secret_key = Rails.application.secrets.secret_key_base[0]
         token = JWT.encode({
           user_id: user.id,
