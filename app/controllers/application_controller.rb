@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::API
+  
   def authenticate
     authorization_header = request.headers[:authorization]
 
